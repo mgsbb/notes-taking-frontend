@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Auth, Home } from './pages';
+import { Auth, Home, Landing } from './pages';
 import { ProtectedRoute, SharedLayout } from './components';
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
 
 			<Route path='/' element={<SharedLayout />}>
 				<Route path='auth' element={<Auth />} />
+				<Route path='landing' element={<Landing />} />
 			</Route>
 		</Routes>
 	);

@@ -54,15 +54,11 @@ const Auth = () => {
 
 	return (
 		<div className='flex flex-col justify-center items-center mt-4 p-6'>
-			{/* Feedback to user */}
-			{message !== '' && (
-				<h2 className='bg-green-400 py-2 px-6  rounded-lg'>{message}</h2>
-			)}
-
 			{/* Login/register form */}
 			<form
 				onSubmit={handleSubmit}
-				className='w-full md:w-3/4 lg:w-1/2 mx-auto mt-10 p-2 md:p-6 lg:p-10 flex flex-col gap-6 border rounded-lg'
+				className='w-full md:w-3/4 lg:w-1/2 mx-auto mt-10 p-2 md:p-6 lg:p-10 flex flex-col gap-6 border 
+				 border-blue-900 rounded-lg'
 			>
 				<h1 className='text-3xl font-bold text-center mt-2 mb-6'>
 					{isLogin ? 'Login' : 'Register'}
@@ -98,7 +94,7 @@ const Auth = () => {
 
 				<AuthInput
 					type='password'
-					label='Password'
+					label='Password:'
 					value={formData.password}
 					onChange={handleChange}
 					id='password'
@@ -117,7 +113,7 @@ const Auth = () => {
 				<div className='flex flex-col md:flex-row gap-3 justify-around my-6'>
 					<button
 						type='submit'
-						className='w-full md:w-1/2  bg-green-400 p-2 rounded-md'
+						className='w-full md:w-1/2 font-semibold bg-blue-600 p-2 rounded-md'
 					>
 						Submit
 					</button>
@@ -125,12 +121,17 @@ const Auth = () => {
 					<button
 						type='button'
 						onClick={() => setIsLogin(!isLogin)}
-						className='w-full md:w-1/2  border border-green-400 p-2 rounded-md'
+						className='w-full md:w-1/2 font-semibold  border border-blue-600 p-2 rounded-md'
 					>
 						{isLogin ? 'New User? Register' : 'Existing User? Login'}
 					</button>
 				</div>
 			</form>
+
+			{/* Feedback to user */}
+			{message !== '' && (
+				<h2 className='bg-blue-600 py-2 px-6 mt-6 rounded-lg'>{message}</h2>
+			)}
 		</div>
 	);
 };
