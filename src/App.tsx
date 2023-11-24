@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Auth, Home, Landing } from './pages';
+import { AuthForm, Home, Landing, CreateNote } from './pages';
 import { ProtectedRoute, SharedLayout } from './components';
 
 function App() {
@@ -14,10 +14,11 @@ function App() {
 				}
 			>
 				<Route index element={<Home />} />
+				<Route path='create' element={<CreateNote />} />
 			</Route>
 
 			<Route path='/' element={<SharedLayout />}>
-				<Route path='auth' element={<Auth />} />
+				<Route path='auth' element={<AuthForm />} />
 				<Route path='landing' element={<Landing />} />
 			</Route>
 		</Routes>

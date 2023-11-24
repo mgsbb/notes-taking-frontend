@@ -1,5 +1,6 @@
 import Home from './Home';
-import Auth from './Auth';
+import AuthForm from './AuthForm';
 import Landing from './Landing';
+import CreateNote from './CreateNote';
 
-export { Home, Auth, Landing };
+export { Home, AuthForm, Landing, CreateNote };

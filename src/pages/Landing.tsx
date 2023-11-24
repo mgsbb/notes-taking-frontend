@@ -1,8 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Medal } from 'lucide-react';
+import { useIsAuth } from '../hooks';
+// ==========================================================================================================
+// Component
+// ==========================================================================================================
 
 const Landing = () => {
+	const isAuth = useIsAuth();
+
+	// ==========================================================================================================
+	// JSX
+	// ==========================================================================================================
+
+	if (isAuth) {
+		return <Navigate to='/' />;
+	}
+
 	return (
 		<div className='flex items-center justify-center flex-col mt-10 gap-10'>
 			<div className='flex items-center justify-center flex-col'>

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { AuthInput } from '../components';
+
+import { useIsAuth } from '../hooks';
+import { Input } from '../components';
 import { TAuthFormData } from '../types';
 import { register, login } from '../slices/userSlice';
 import type { AppDispatch, RootState } from '../store';
@@ -20,11 +22,11 @@ const initialState: TAuthFormData = {
 };
 
 // ==========================================================================================================
-// JSX
+// Component
 // ==========================================================================================================
 
 const Auth = () => {
-	const [token, setToken] = useState(localStorage.getItem('profile'));
+	const isAuth = useIsAuth();
 
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
@@ -48,7 +50,11 @@ const Auth = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
-	if (token) {
+	// ==========================================================================================================
+	// JSX
+	// ==========================================================================================================
+
+	if (isAuth) {
 		return <Navigate to='/' />;
 	}
 
@@ -66,7 +72,7 @@ const Auth = () => {
 
 				{!isLogin && (
 					<>
-						<AuthInput
+						<Input
 							type='text'
 							label='First Name:'
 							value={formData.firstName}
@@ -74,7 +80,7 @@ const Auth = () => {
 							id='firstName'
 						/>
 
-						<AuthInput
+						<Input
 							type='text'
 							label='Last Name:'
 							value={formData.lastName}
@@ -84,7 +90,7 @@ const Auth = () => {
 					</>
 				)}
 
-				<AuthInput
+				<Input
 					type='text'
 					label='Email:'
 					value={formData.email}
@@ -92,7 +98,7 @@ const Auth = () => {
 					id='email'
 				/>
 
-				<AuthInput
+				<Input
 					type='password'
 					label='Password:'
 					value={formData.password}
@@ -101,7 +107,7 @@ const Auth = () => {
 				/>
 
 				{!isLogin && (
-					<AuthInput
+					<Input
 						type='password'
 						label='Confirm password:'
 						value={formData.confirmPassword}

@@ -1,5 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
-import { TAuthFormData } from '../types';
+import { TAuthFormData, TNoteFormData } from '../types';
 
 // ==========================================================================================================
 // Axios instance
@@ -32,7 +32,7 @@ api.interceptors.request.use(
 );
 
 // ==========================================================================================================
-// API methods
+// API methods - User
 // ==========================================================================================================
 
 export const register = (formData: TAuthFormData) => {
@@ -41,4 +41,28 @@ export const register = (formData: TAuthFormData) => {
 
 export const login = (formData: TAuthFormData) => {
 	return api.post('/users/login', { formData });
+};
+
+// ==========================================================================================================
+// API methods - Notes
+// ==========================================================================================================
+
+export const getNotes = () => {
+	return api.get('/notes');
+};
+
+export const getNote = (noteId: string) => {
+	return api.get(`/notes/${noteId}`);
+};
+
+export const createNote = (formData: TNoteFormData) => {
+	return api.post('/notes', { formData });
+};
+
+export const updateNote = (formData: TNoteFormData, noteId: string) => {
+	return api.patch(`/notes/${noteId}`, { formData });
+};
+
+export const deleteNote = (noteId: string) => {
+	return api.delete(`/notes/${noteId}`);
 };

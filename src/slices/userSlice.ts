@@ -13,7 +13,7 @@ export const register = createAsyncThunk(
 			const response = await api.register(arg.formData);
 			arg.navigate('/');
 			return response.data;
-		} catch (error) {
+		} catch (error: any) {
 			console.log(error.response.data);
 			return thunkAPI.rejectWithValue(error.response.data?.message);
 		}
@@ -29,7 +29,7 @@ export const login = createAsyncThunk(
 			const response = await api.login(arg.formData);
 			arg.navigate('/');
 			return response.data;
-		} catch (error) {
+		} catch (error: any) {
 			console.log(error.response.data);
 			return thunkAPI.rejectWithValue(error.response.data?.message);
 		}
@@ -46,7 +46,13 @@ const userSlice = createSlice({
 		token: '',
 		message: '',
 	},
-	reducers: {},
+	reducers: {
+		logout: (state) => {
+			localStorage.removeItem('profile');
+			state.message = '';
+			state.token = '';
+		},
+	},
 	extraReducers: (build) => {
 		build
 			.addCase(register.pending, (state, action) => {
@@ -79,6 +85,8 @@ const userSlice = createSlice({
 // ==========================================================================================================
 // Exports
 // ==========================================================================================================
+
+export const { logout } = userSlice.actions;
 
 const userReducer = userSlice.reducer;
 export default userReducer;

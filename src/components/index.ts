@@ -1,5 +1,6 @@
-import AuthInput from './AuthInput';
+import Input from './Input';
 import ProtectedRoute from './ProtectedRoute';
 import SharedLayout from './SharedLayout';
+import Sidebar from './Sidebar';
 
-export { AuthInput, ProtectedRoute, SharedLayout };
+export { Input, ProtectedRoute, SharedLayout, Sidebar };
