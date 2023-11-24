@@ -1,7 +1,18 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import { TAuthFormData } from '../types';
 
-const api = axios.create({ baseURL: 'http://localhost:5000/api/v1' });
+// ==========================================================================================================
+// Axios instance
+// ==========================================================================================================
+
+const api = axios.create({
+	baseURL: 'http://localhost:5000/api/v1',
+	// withCredentials: false,
+});
+
+// ==========================================================================================================
+// Axios interceptors
+// ==========================================================================================================
 
 api.interceptors.request.use(
 	(req: InternalAxiosRequestConfig<any>): InternalAxiosRequestConfig<any> => {
@@ -20,6 +31,14 @@ api.interceptors.request.use(
 	}
 );
 
-export const createUser = (formData: TAuthFormData) => {
+// ==========================================================================================================
+// API methods
+// ==========================================================================================================
+
+export const register = (formData: TAuthFormData) => {
 	return api.post('/users', { formData });
+};
+
+export const login = (formData: TAuthFormData) => {
+	return api.post('/users/login', { formData });
 };

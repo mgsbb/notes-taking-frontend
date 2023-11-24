@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { AuthInput } from '../components';
 import { TAuthFormData } from '../types';
-import { createUser } from '../slices/userSlice';
-import type { AppDispatch } from '../store';
+import { register, login } from '../slices/userSlice';
+import type { AppDispatch, RootState } from '../store';
+
+// ==========================================================================================================
+// Initial state
+// ==========================================================================================================
 
 const initialState: TAuthFormData = {
 	firstName: '',
@@ -13,16 +19,28 @@ const initialState: TAuthFormData = {
 	confirmPassword: '',
 };
 
+// ==========================================================================================================
+// JSX
+// ==========================================================================================================
+
 const Auth = () => {
+	const [token, setToken] = useState(localStorage.getItem('profile'));
+
 	const dispatch = useDispatch<AppDispatch>();
+	const navigate = useNavigate();
+
+	const message = useSelector((state: RootState) => state.user.message);
+
 	const [formData, setFormData] = useState(initialState);
 	const [isLogin, setIsLogin] = useState(true);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (!isLogin) {
-			dispatch(createUser({ formData }));
+		if (isLogin) {
+			dispatch(login({ formData, navigate }));
+		} else {
+			dispatch(register({ formData, navigate }));
 		}
 	};
 
@@ -30,8 +48,18 @@ const Auth = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
+	if (token) {
+		return <Navigate to='/' />;
+	}
+
 	return (
 		<div className='flex flex-col justify-center items-center mt-4 p-6'>
+			{/* Feedback to user */}
+			{message !== '' && (
+				<h2 className='bg-green-400 py-2 px-6  rounded-lg'>{message}</h2>
+			)}
+
+			{/* Login/register form */}
 			<form
 				onSubmit={handleSubmit}
 				className='w-full md:w-3/4 lg:w-1/2 mx-auto mt-10 p-2 md:p-6 lg:p-10 flex flex-col gap-6 border rounded-lg'
