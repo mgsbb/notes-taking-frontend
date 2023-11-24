@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { AuthInput } from '../components';
+import { TAuthFormData } from '../types';
+import { createUser } from '../slices/userSlice';
+import type { AppDispatch } from '../store';
 
-const initialState = {
+const initialState: TAuthFormData = {
 	firstName: '',
 	lastName: '',
 	email: '',
@@ -10,12 +14,16 @@ const initialState = {
 };
 
 const Auth = () => {
+	const dispatch = useDispatch<AppDispatch>();
 	const [formData, setFormData] = useState(initialState);
 	const [isLogin, setIsLogin] = useState(true);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(formData);
+
+		if (!isLogin) {
+			dispatch(createUser({ formData }));
+		}
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
