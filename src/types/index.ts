@@ -11,4 +11,5 @@ export type TNoteFormData = {
 	title?: string;
 	content?: string;
 	tags?: string;
+	updatedAt?: string;
 };
