@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
-import { useIsAuth } from '../hooks';
+import { useAppDispatch, useAppSelector, useIsAuth } from '../hooks';
 import { Input } from '../components';
 import { TAuthFormData } from '../types';
 import { register, login } from '../slices/userSlice';
-import type { AppDispatch, RootState } from '../store';
 
 // ==========================================================================================================
 // Initial state
@@ -28,12 +26,14 @@ const initialState: TAuthFormData = {
 const Auth = () => {
 	const isAuth = useIsAuth();
 
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useAppDispatch();
+
 	const navigate = useNavigate();
 
-	const message = useSelector((state: RootState) => state.user.message);
+	const message = useAppSelector((state) => state.user.message);
 
 	const [formData, setFormData] = useState(initialState);
+
 	const [isLogin, setIsLogin] = useState(true);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

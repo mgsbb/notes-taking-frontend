@@ -1,23 +1,26 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { LogOut } from 'lucide-react';
 
-import type { AppDispatch } from '../../store';
 import { logout } from '../../slices/userSlice';
 import useIsAuth from '../../hooks/useIsAuth';
 import Logo from './Logo';
+import { useAppDispatch } from '../../hooks';
 
 // ==========================================================================================================
-// JSX
+// Component
 // ==========================================================================================================
 
 const Navbar = () => {
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useAppDispatch();
 	const isAuth = useIsAuth();
 
 	const handleLogout = () => {
 		dispatch(logout());
 	};
+
+	// ==========================================================================================================
+	// JSX
+	// ==========================================================================================================
 
 	return (
 		<header className='w-full border-b border-blue-800 text-white p-4'>

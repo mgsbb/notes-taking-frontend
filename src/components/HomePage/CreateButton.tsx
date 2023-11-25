@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 
+// ==========================================================================================================
+// Component
+// ==========================================================================================================
+
 const CreateButton = () => {
 	return (
 		<Link to='/notes/create' className='flex gap-2 items-center'>

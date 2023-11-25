@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
+// ==========================================================================================================
+// Component
+// ==========================================================================================================
+
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 	const [token, setToken] = useState(localStorage.getItem('profile'));
 

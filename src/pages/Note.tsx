@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Pen, Trash, ChevronLeftCircle } from 'lucide-react';
-import { useParams } from 'react-router-dom';
 import { deleteNote, getNote } from '../slices/noteSlice';
-import { AppDispatch, RootState } from '../store';
+import { useAppDispatch, useAppSelector } from '../hooks';
+
+// ==========================================================================================================
+// Component
+// ==========================================================================================================
 
 const Note = () => {
 	const { noteId } = useParams();
 
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useAppDispatch();
 
 	const navigate = useNavigate();
 
@@ -19,12 +21,16 @@ const Note = () => {
 		}
 	}, [noteId]);
 
-	const note = useSelector((state: RootState) => state.note.currentNote);
+	const note = useAppSelector((state) => state.note.currentNote);
 
 	const updatedTime =
 		note?.updatedAt?.split('T')[0] +
 		' ' +
 		note?.updatedAt?.split('T')[1].split('.')[0];
+
+	// ==========================================================================================================
+	// JSX
+	// ==========================================================================================================
 
 	return (
 		<div

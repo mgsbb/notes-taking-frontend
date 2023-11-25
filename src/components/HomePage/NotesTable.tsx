@@ -1,8 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { TNoteFormData } from '../../types';
 
+// ==========================================================================================================
+// Component
+// ==========================================================================================================
+
 const NotesTable = ({ notes }: { notes: TNoteFormData[] }) => {
 	const navigate = useNavigate();
+
+	// ==========================================================================================================
+	// JSX
+	// ==========================================================================================================
+
 	return (
 		<table className='table table-fixed w-full text-center border-collapse border-t border-blue-800'>
 			<thead>

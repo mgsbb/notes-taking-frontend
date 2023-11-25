@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Navigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { ChevronLeftCircle } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
-import { useIsAuth } from '../hooks';
-import { AppDispatch, RootState } from '../store';
+import { useAppDispatch, useAppSelector, useIsAuth } from '../hooks';
 import { TNoteFormData } from '../types';
 import { Input } from '../components';
 import { createNote, getNote, updateNote } from '../slices/noteSlice';
@@ -33,13 +31,13 @@ const CreateNote = () => {
 	const { noteId } = useParams();
 
 	const navigate = useNavigate();
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		if (noteId !== undefined) dispatch(getNote({ noteId }));
 	}, [noteId, dispatch]);
 
-	const currentNote = useSelector((state: RootState) => state.note.currentNote);
+	const currentNote = useAppSelector((state) => state.note.currentNote);
 
 	useEffect(() => {
 		if (isEdit) {

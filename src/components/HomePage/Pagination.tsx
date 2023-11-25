@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { getNotes } from '../../slices/noteSlice';
 import { getLastPage, getRange } from '../../helpers/pagination';
 
+// ==========================================================================================================
+// Component
+// ==========================================================================================================
+
 const Pagination = ({ notesCount }: { notesCount: number }) => {
 	const { searchQuery, sortQuery, pageQuery } = useQuery();
 
@@ -33,6 +37,10 @@ const Pagination = ({ notesCount }: { notesCount: number }) => {
 			getNotes({ page: pageQuery, sort: sortQuery, search: searchQuery })
 		);
 	};
+
+	// ==========================================================================================================
+	// JSX
+	// ==========================================================================================================
 
 	return (
 		<div className='flex w-full justify-center items-center gap-10'>

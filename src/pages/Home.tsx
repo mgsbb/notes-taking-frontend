@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import {
 	SearchForm,
 	CreateButton,
@@ -7,21 +6,28 @@ import {
 	NotesTable,
 } from '../components';
 import { getNotes } from '../slices/noteSlice';
-import { AppDispatch, RootState } from '../store';
-import { useQuery } from '../hooks';
+import { useAppDispatch, useAppSelector, useQuery } from '../hooks';
+
+// ==========================================================================================================
+// Component
+// ==========================================================================================================
 
 const Home = () => {
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useAppDispatch();
 
 	const { pageQuery, searchQuery, sortQuery } = useQuery();
 
-	const notes = useSelector((state: RootState) => state.note.allNotes);
+	const notes = useAppSelector((state) => state.note.allNotes);
 
 	useEffect(() => {
 		dispatch(
 			getNotes({ page: pageQuery, search: searchQuery, sort: sortQuery })
 		);
 	}, [dispatch]);
+
+	// ==========================================================================================================
+	// JSX
+	// ==========================================================================================================
 
 	return (
 		<div className='w-full md:w-5/6 mx-auto flex flex-col gap-6 mt-5 px-4 md:p-0'>
