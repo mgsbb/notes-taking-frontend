@@ -30,7 +30,7 @@ const Home = () => {
 				<SearchForm />
 			</div>
 
-			<Pagination />
+			<Pagination notesCount={notes.length} />
 
 			<main className='w-full'>
 				{notes.length === 0 ? (
