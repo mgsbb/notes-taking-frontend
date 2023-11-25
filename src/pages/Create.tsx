@@ -127,7 +127,7 @@ const CreateNote = () => {
 							setFormData({ ...formData, [e.target.name]: e.target.value });
 						}}
 						className='dark:border-b border border-black/30 rounded-md p-2 w-full bg-gray-800
-				text-white bg-transparent border-blue-700 focus:outline-none'
+				dark:text-white bg-transparent border-blue-700 focus:outline-none'
 					></textarea>
 				</div>
 
