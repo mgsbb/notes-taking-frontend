@@ -8,14 +8,19 @@ import {
 } from '../components';
 import { getNotes } from '../slices/noteSlice';
 import { AppDispatch, RootState } from '../store';
+import { useQuery } from '../hooks';
 
 const Home = () => {
 	const dispatch = useDispatch<AppDispatch>();
 
+	const { pageQuery, searchQuery, sortQuery } = useQuery();
+
 	const notes = useSelector((state: RootState) => state.note.allNotes);
 
 	useEffect(() => {
-		dispatch(getNotes());
+		dispatch(
+			getNotes({ page: pageQuery, search: searchQuery, sort: sortQuery })
+		);
 	}, [dispatch]);
 
 	return (
@@ -28,7 +33,11 @@ const Home = () => {
 			<Pagination />
 
 			<main className='w-full'>
-				<NotesTable notes={notes} />
+				{notes.length === 0 ? (
+					<p className='text-3xl'>No notes found</p>
+				) : (
+					<NotesTable notes={notes} />
+				)}
 			</main>
 		</div>
 	);

@@ -47,8 +47,8 @@ export const login = (formData: TAuthFormData) => {
 // API methods - Notes
 // ==========================================================================================================
 
-export const getNotes = () => {
-	return api.get('/notes');
+export const getNotes = (page: string, sort: string, search: string) => {
+	return api.get(`/notes?sort=${sort}&search=${search}&page=${page}`);
 };
 
 export const getNote = (noteId: string) => {

@@ -1,12 +1,24 @@
 import { useState } from 'react';
 import { Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useQuery } from '../../hooks';
+import { getNotes } from '../../slices/noteSlice';
+import { AppDispatch } from '../../store';
 
 const SearchForm = () => {
 	const [search, setSearch] = useState('');
 
+	const { pageQuery, sortQuery } = useQuery();
+
+	const dispatch = useDispatch<AppDispatch>();
+
+	const navigate = useNavigate();
+
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(search);
+		navigate(`?search=${search}&page=${pageQuery}&sort=${sortQuery}`);
+		dispatch(getNotes({ search: search, page: pageQuery, sort: sortQuery }));
 	};
 
 	return (

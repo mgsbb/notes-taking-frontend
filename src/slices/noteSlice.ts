@@ -8,9 +8,9 @@ import { TNoteFormData } from '../types';
 
 export const getNotes = createAsyncThunk(
 	'note/getNotes',
-	async (_, thunkAPI) => {
+	async (arg: { page: string; sort: string; search: string }, thunkAPI) => {
 		try {
-			const response: any = await api.getNotes();
+			const response: any = await api.getNotes(arg.page, arg.sort, arg.search);
 			return response.data;
 		} catch (error: any) {
 			// console.log(error);
