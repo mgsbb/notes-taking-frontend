@@ -21,15 +21,18 @@ export const getNotes = createAsyncThunk(
 
 // ==========================================================================================================
 
-export const getNote = createAsyncThunk('note/getNote', async (_, thunkAPI) => {
-	try {
-		const response: any = await api.getNotes();
-		return response.data;
-	} catch (error: any) {
-		// console.log(error);
-		return thunkAPI.rejectWithValue(error.response.data);
+export const getNote = createAsyncThunk(
+	'note/getNote',
+	async (arg: { noteId: string }, thunkAPI) => {
+		try {
+			const response: any = await api.getNote(arg.noteId);
+			return response.data;
+		} catch (error: any) {
+			// console.log(error);
+			return thunkAPI.rejectWithValue(error.response.data);
+		}
 	}
-});
+);
 
 // ==========================================================================================================
 
@@ -112,10 +115,19 @@ const noteSlice = createSlice({
 				state.message = 'Fetched successfully';
 				state.allNotes = action.payload?.notes;
 			})
-			.addCase(getNotes.rejected, (state, action) => {})
-			.addCase(getNote.pending, (state, action) => {})
-			.addCase(getNote.fulfilled, (state, action) => {})
-			.addCase(getNote.rejected, (state, action) => {});
+			.addCase(getNotes.rejected, (state, action) => {
+				state.message = 'Fetched failed';
+			})
+			.addCase(getNote.pending, (state, action) => {
+				state.message = 'Fetching note...';
+			})
+			.addCase(getNote.fulfilled, (state, action) => {
+				state.message = 'Fetched successfully';
+				state.currentNote = action.payload?.note;
+			})
+			.addCase(getNote.rejected, (state, action) => {
+				state.message = 'Fetched failed';
+			});
 	},
 });
 

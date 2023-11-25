@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate, Navigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, Navigate, Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { ChevronLeftCircle } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 import { useIsAuth } from '../hooks';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { TNoteFormData } from '../types';
 import { Input } from '../components';
-import { createNote } from '../slices/noteSlice';
+import { createNote, getNote, updateNote } from '../slices/noteSlice';
 
 // ==========================================================================================================
 // Initial state
@@ -27,13 +28,41 @@ const CreateNote = () => {
 	const isAuth = useIsAuth();
 	const [formData, setFormData] = useState(initialState);
 
+	const location = useLocation();
+	const isEdit = location.pathname.includes('/edit') ? true : false;
+	const { noteId } = useParams();
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>();
+
+	useEffect(() => {
+		if (noteId !== undefined) dispatch(getNote({ noteId }));
+	}, [noteId, dispatch]);
+
+	const currentNote = useSelector((state: RootState) => state.note.currentNote);
+
+	useEffect(() => {
+		if (isEdit) {
+			setFormData(() => {
+				return {
+					title: currentNote.title,
+					content: currentNote.content,
+					tags: currentNote.tags,
+				};
+			});
+		}
+	}, [isEdit, currentNote]);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		dispatch(createNote({ formData, navigate }));
+		if (isEdit) {
+			if (noteId !== undefined) {
+				dispatch(updateNote({ formData, noteId, navigate }));
+			}
+		} else {
+			dispatch(createNote({ formData, navigate }));
+		}
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,13 +87,15 @@ const CreateNote = () => {
 					<Link to='/'>
 						<ChevronLeftCircle size={48} strokeWidth={0.75} />
 					</Link>
-					<h1 className='text-3xl font-bold text-center w-full'>Create Note</h1>
+					<h1 className='text-3xl font-bold text-center w-full'>
+						{isEdit ? 'Edit Note' : 'Create Note'}
+					</h1>
 				</div>
 
 				<Input
 					type='text'
 					label='Title: '
-					value={formData.title}
+					value={formData.title!}
 					onChange={handleChange}
 					id='title'
 				/>
@@ -72,7 +103,7 @@ const CreateNote = () => {
 				<Input
 					type='text'
 					label='Tags: (comma separated)'
-					value={formData.tags}
+					value={formData.tags!}
 					onChange={handleChange}
 					id='tags'
 				/>
