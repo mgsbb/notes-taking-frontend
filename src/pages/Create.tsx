@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Navigate, Link, useParams } from 'react-router-dom';
+import { useNavigate, Navigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChevronLeftCircle } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
@@ -84,9 +84,13 @@ const CreateNote = () => {
 				 border-blue-900 rounded-lg'
 			>
 				<div className='flex flex-row items-center my-4'>
-					<Link to='/'>
+					{/* Back button */}
+					{/* BUG: Navigates back home always */}
+					<button onClick={() => navigate(-1)}>
 						<ChevronLeftCircle size={48} strokeWidth={0.75} />
-					</Link>
+					</button>
+
+					{/* Title */}
 					<h1 className='text-3xl font-bold text-center w-full'>
 						{isEdit ? 'Edit Note' : 'Create Note'}
 					</h1>

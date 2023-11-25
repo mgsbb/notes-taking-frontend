@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Pen, Trash } from 'lucide-react';
+import { Pen, Trash, ChevronLeftCircle } from 'lucide-react';
 import { useParams } from 'react-router-dom';
-import { getNote } from '../slices/noteSlice';
+import { deleteNote, getNote } from '../slices/noteSlice';
 import { AppDispatch, RootState } from '../store';
 
 const Note = () => {
@@ -44,13 +44,18 @@ const Note = () => {
 			<p className='flex gap-2 flex-wrap'>
 				{/* TODO: Handle empty tags */}
 				{note.tags?.split(',').map((tag) => (
-					<span className='bg-blue-800 py-1 px-4 rounded-md'>
+					<span key={tag} className='bg-blue-800 py-1 px-4 rounded-md'>
 						{tag.length !== 0 && tag}
 					</span>
 				))}
 			</p>
 
+			{/* Back, edit, delete buttons */}
 			<div className='flex items-center gap-6'>
+				<button onClick={() => navigate(-1)} className='text-blue-300'>
+					<ChevronLeftCircle size={36} strokeWidth={0.75} />
+				</button>
+
 				<button
 					type='button'
 					onClick={() => navigate(`/notes/edit/${note._id}`)}
@@ -62,6 +67,11 @@ const Note = () => {
 
 				<button
 					type='button'
+					onClick={() => {
+						if (window.confirm('Are you sure?') && noteId !== undefined) {
+							dispatch(deleteNote({ noteId, navigate }));
+						}
+					}}
 					className='flex gap-2 items-center border border-red-500 py-1 px-4 rounded-md text-red-500'
 				>
 					<Trash size={16} strokeWidth={1.5} />
