@@ -15,7 +15,7 @@ const NotesTable = ({ notes }: { notes: TNoteFormData[] }) => {
 	return (
 		<table className='table table-fixed w-full text-center border-collapse border-t border-blue-800'>
 			<thead>
-				<tr className='text-lg '>
+				<tr className='text-lg dark:text-blue-400 text-blue-700'>
 					<th className='p-4'>Title</th>
 					<th className='hidden md:table-cell'>Content</th>
 					<th>Tags</th>
@@ -29,7 +29,9 @@ const NotesTable = ({ notes }: { notes: TNoteFormData[] }) => {
 						key={note._id}
 						onClick={() => navigate(`/notes/${note._id}`)}
 						className={`${
-							index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'
+							index % 2 === 0
+								? 'dark:bg-gray-800 bg-blue-100 dark:text-blue-200 text-blue-900'
+								: 'dark:bg-gray-700 bg-blue-50 dark:text-blue-200 text-blue-900'
 						} cursor-pointer`}
 					>
 						<td className='p-2'>

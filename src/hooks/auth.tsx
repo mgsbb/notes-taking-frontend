@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useIsAuth = () => {
+export const useIsAuth = () => {
 	const [profile, setProfile] = useState(localStorage.getItem('profile'));
 
 	useEffect(() => {
@@ -12,5 +12,3 @@ const useIsAuth = () => {
 	if (profile) return true;
 	return false;
 };
-
-export default useIsAuth;

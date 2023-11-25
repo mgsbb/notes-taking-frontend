@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ChevronLeftCircle } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector, useIsAuth } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { TNoteFormData } from '../types';
-import { Input } from '../components';
+import { Input, Button } from '../components';
 import { createNote, getNote, updateNote } from '../slices/noteSlice';
 
 // ==========================================================================================================
@@ -23,7 +23,6 @@ const initialState: TNoteFormData = {
 // ==========================================================================================================
 
 const CreateNote = () => {
-	const isAuth = useIsAuth();
 	const [formData, setFormData] = useState(initialState);
 
 	const location = useLocation();
@@ -70,26 +69,26 @@ const CreateNote = () => {
 	// ==========================================================================================================
 	// JSX
 	// ==========================================================================================================
-	if (!isAuth) {
-		return <Navigate to='/login' />;
-	}
 
 	return (
 		<div className='w-full p-10'>
 			<form
 				onSubmit={handleSubmit}
 				className='w-full md:w-3/4 lg:w-1/2 mx-auto mt-10 p-2 md:p-6 lg:p-10 flex flex-col gap-6 border 
-				 border-blue-900 rounded-lg'
+				 border-blue-900 rounded-lg '
 			>
 				<div className='flex flex-row items-center my-4'>
 					{/* Back button */}
 					{/* BUG: Navigates back home always */}
-					<button onClick={() => navigate(-1)}>
+					<button
+						className='text-blue-600 dark:text-blue-300'
+						onClick={() => navigate(-1)}
+					>
 						<ChevronLeftCircle size={48} strokeWidth={0.75} />
 					</button>
 
 					{/* Title */}
-					<h1 className='text-3xl font-bold text-center w-full'>
+					<h1 className='text-3xl font-bold text-center w-full text-blue-600 dark:text-blue-300'>
 						{isEdit ? 'Edit Note' : 'Create Note'}
 					</h1>
 				</div>
@@ -112,7 +111,10 @@ const CreateNote = () => {
 				/>
 
 				<div className='flex flex-col justify-between items-start w-full gap-2'>
-					<label htmlFor='content' className='text-md md:text-lg lg:text-xl'>
+					<label
+						htmlFor='content'
+						className='text-md md:text-lg lg:text-xl dark:text-blue-300 text-blue-900'
+					>
 						Content:
 					</label>
 					<textarea
@@ -124,26 +126,20 @@ const CreateNote = () => {
 						onChange={(e) => {
 							setFormData({ ...formData, [e.target.name]: e.target.value });
 						}}
-						className='border-b border-black/30 rounded-md p-2 w-full bg-gray-800
+						className='dark:border-b border border-black/30 rounded-md p-2 w-full bg-gray-800
 				text-white bg-transparent border-blue-700 focus:outline-none'
 					></textarea>
 				</div>
 
 				<div className='flex flex-col md:flex-row gap-3 justify-around my-6'>
-					<button
+					<Button
 						type='button'
+						variant='outlined'
+						label='Reset'
 						onClick={() => setFormData(initialState)}
-						className='w-full md:w-1/2 font-semibold  border border-blue-600 p-2 rounded-md'
-					>
-						Reset
-					</button>
+					/>
 
-					<button
-						type='submit'
-						className='w-full md:w-1/2 font-semibold bg-blue-600 p-2 rounded-md'
-					>
-						Submit
-					</button>
+					<Button type='submit' variant='solid' label='Submit' />
 				</div>
 			</form>
 		</div>

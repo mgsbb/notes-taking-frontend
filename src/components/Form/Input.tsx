@@ -20,7 +20,10 @@ type Props = {
 const Input = ({ value, onChange, label, id, type, required }: Props) => {
 	return (
 		<div className='flex flex-col gap-2	 justify-between items-start'>
-			<label htmlFor={id} className='text-md md:text-lg lg:text-xl '>
+			<label
+				htmlFor={id}
+				className='text-md md:text-lg lg:text-xl dark:text-blue-300 text-blue-900'
+			>
 				{label}
 			</label>
 			<input
@@ -30,8 +33,8 @@ const Input = ({ value, onChange, label, id, type, required }: Props) => {
 				required={required}
 				value={value}
 				onChange={onChange}
-				className='border-b border-black/30 rounded-md p-2 w-full 
-				text-white bg-gray-800 border-blue-700 focus:outline-none'
+				className='dark:border-b border border-blue-700  rounded-md p-2 w-full 
+				dark:text-white text-black dark:bg-gray-800  focus:outline-none'
 			/>
 		</div>
 	);

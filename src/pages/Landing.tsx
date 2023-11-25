@@ -27,7 +27,7 @@ const Landing = () => {
 					No 1 Note Taker
 				</div>
 
-				<h1 className='text-3xl md:text-6xl text-center text-blue-400 mb-6 font-bold'>
+				<h1 className='text-3xl md:text-6xl text-center dark:text-blue-400 text-blue-700 mb-6 font-bold'>
 					<span className='text-bold'>Note-Out </span>
 					helps you
 				</h1>
@@ -40,7 +40,7 @@ const Landing = () => {
 				</div>
 			</div>
 
-			<div className='text-sm md:text-xl font-semibold text-neutral-300 mt-4 max-w-xs md:max-w-2xl text-center mx-auto'>
+			<div className='text-sm md:text-xl font-semibold text-blue-800 dark:text-blue-200 mt-4 max-w-xs md:max-w-2xl text-center mx-auto'>
 				Create, edit and organize your notes. Capture ideas, reminders, taks and
 				important information. Categorize your notes and sync across all of your
 				devices.

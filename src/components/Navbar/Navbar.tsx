@@ -1,23 +1,12 @@
-import { Link } from 'react-router-dom';
-import { LogOut } from 'lucide-react';
-
-import { logout } from '../../slices/userSlice';
-import useIsAuth from '../../hooks/useIsAuth';
 import Logo from './Logo';
-import { useAppDispatch } from '../../hooks';
+import AuthButton from './AuthButton';
+import ToggleTheme from './ToggleTheme';
 
 // ==========================================================================================================
 // Component
 // ==========================================================================================================
 
 const Navbar = () => {
-	const dispatch = useAppDispatch();
-	const isAuth = useIsAuth();
-
-	const handleLogout = () => {
-		dispatch(logout());
-	};
-
 	// ==========================================================================================================
 	// JSX
 	// ==========================================================================================================
@@ -28,23 +17,8 @@ const Navbar = () => {
 				<Logo />
 
 				<div className='flex gap-10 items-center'>
-					{isAuth ? (
-						<Link to='/landing'>
-							<button
-								type='button'
-								onClick={handleLogout}
-								className='bg-blue-600 px-4 py-2 rounded-md font-semibold'
-							>
-								<LogOut />
-							</button>
-						</Link>
-					) : (
-						<Link to='/auth'>
-							<button className='bg-blue-600 px-4 py-2 rounded-md font-semibold'>
-								Login
-							</button>
-						</Link>
-					)}
+					<ToggleTheme />
+					<AuthButton />
 				</div>
 			</nav>
 		</header>

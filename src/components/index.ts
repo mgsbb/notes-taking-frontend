@@ -6,6 +6,7 @@ import NotesTable from './HomePage/NotesTable';
 import SearchForm from './HomePage/SearchForm';
 import CreateButton from './HomePage/CreateButton';
 import Pagination from './HomePage/Pagination';
+import Button from './Form/Button';
 
 export {
 	Input,
@@ -16,4 +17,5 @@ export {
 	SearchForm,
 	CreateButton,
 	Pagination,
+	Button,
 };

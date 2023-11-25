@@ -45,7 +45,8 @@ const SearchForm = () => {
 				onChange={(e) => {
 					setSearch(e.target.value);
 				}}
-				className='p-2 bg-transparent  w-full  text-white placeholder:text-blue-300 focus:outline-none'
+				className='p-2 bg-transparent  w-full dark:text-white 
+				text-black dark:placeholder:text-blue-300 focus:outline-none placeholder:text-blue-600'
 			/>
 
 			<button className='text-blue-300'>

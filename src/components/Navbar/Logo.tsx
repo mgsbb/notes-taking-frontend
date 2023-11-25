@@ -7,7 +7,7 @@ import { ScrollText } from 'lucide-react';
 
 const Logo = () => {
 	return (
-		<Link to='/landing' className='flex gap-2 text-blue-300 '>
+		<Link to='/landing' className='flex gap-2 dark:text-blue-300 text-blue-600'>
 			<ScrollText />
 			<p className='font-extrabold'>Note-Out</p>
 		</Link>

@@ -10,9 +10,11 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
+			<div className='dark:bg-gray-900 min-h-screen'>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</div>
 		</Provider>
 	</React.StrictMode>
 );

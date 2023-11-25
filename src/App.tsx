@@ -2,6 +2,10 @@ import { Routes, Route } from 'react-router-dom';
 import { Auth, Home, Landing, Create, Note } from './pages';
 import { ProtectedRoute, SharedLayout } from './components';
 
+// ==========================================================================================================
+// Component
+// ==========================================================================================================
+
 function App() {
 	return (
 		<Routes>

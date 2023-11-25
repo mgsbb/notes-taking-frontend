@@ -36,9 +36,10 @@ const Home = () => {
 				<SearchForm />
 			</div>
 
-			<Pagination notesCount={notes.length} />
+			{/* TODO: Complete with functionality */}
+			{/* <Pagination notesCount={notes.length} /> */}
 
-			<main className='w-full'>
+			<main className='w-full pb-16'>
 				{notes.length === 0 ? (
 					<p className='text-3xl'>No notes found</p>
 				) : (
