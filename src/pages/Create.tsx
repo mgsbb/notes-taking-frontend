@@ -100,6 +100,7 @@ const CreateNote = () => {
 					value={formData.title!}
 					onChange={handleChange}
 					id='title'
+					required={true}
 				/>
 
 				<Input

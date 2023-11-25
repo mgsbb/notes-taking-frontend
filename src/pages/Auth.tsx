@@ -78,6 +78,7 @@ const Auth = () => {
 							value={formData.firstName}
 							onChange={handleChange}
 							id='firstName'
+							required={true}
 						/>
 
 						<Input
@@ -91,11 +92,12 @@ const Auth = () => {
 				)}
 
 				<Input
-					type='text'
+					type='email'
 					label='Email:'
 					value={formData.email}
 					onChange={handleChange}
 					id='email'
+					required={true}
 				/>
 
 				<Input
@@ -104,6 +106,7 @@ const Auth = () => {
 					value={formData.password}
 					onChange={handleChange}
 					id='password'
+					required={true}
 				/>
 
 				{!isLogin && (
@@ -113,6 +116,7 @@ const Auth = () => {
 						value={formData.confirmPassword}
 						onChange={handleChange}
 						id='confirmPassword'
+						required={true}
 					/>
 				)}
 

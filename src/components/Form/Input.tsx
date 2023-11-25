@@ -9,6 +9,7 @@ type Props = {
 	label: string;
 	id: string;
 	type: string;
+	required?: boolean;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -16,7 +17,7 @@ type Props = {
 // Component
 // ==========================================================================================================
 
-const Input = ({ value, onChange, label, id, type }: Props) => {
+const Input = ({ value, onChange, label, id, type, required }: Props) => {
 	return (
 		<div className='flex flex-col gap-2	 justify-between items-start'>
 			<label htmlFor={id} className='text-md md:text-lg lg:text-xl '>
@@ -26,6 +27,7 @@ const Input = ({ value, onChange, label, id, type }: Props) => {
 				type={type}
 				id={id}
 				name={id}
+				required={required}
 				value={value}
 				onChange={onChange}
 				className='border-b border-black/30 rounded-md p-2 w-full 
