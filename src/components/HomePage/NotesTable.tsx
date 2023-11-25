@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { TNoteFormData } from '../../types';
 
 const NotesTable = ({ notes }: { notes: TNoteFormData[] }) => {
+	const navigate = useNavigate();
 	return (
 		<table className='table table-fixed w-full text-center border-collapse border-t border-blue-800'>
 			<thead>
@@ -16,12 +18,15 @@ const NotesTable = ({ notes }: { notes: TNoteFormData[] }) => {
 				{notes.map((note, index) => (
 					<tr
 						key={note._id}
-						className={`${index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'}`}
+						onClick={() => navigate(`/notes/${note._id}`)}
+						className={`${
+							index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'
+						} cursor-pointer`}
 					>
 						<td className='p-2'>
-							<span>{note.title?.substring(0, 10)}</span>
+							<span>{note.title?.substring(0, 15)}</span>
 							<span>
-								{note.title?.length && note.title.length > 10 && '...'}
+								{note.title?.length && note.title.length > 15 && '...'}
 							</span>
 						</td>
 						<td className='hidden md:table-cell'>
